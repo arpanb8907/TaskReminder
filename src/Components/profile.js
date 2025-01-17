@@ -19,63 +19,63 @@ function Profile() {
   const [arr_data, setarr_data] = useState([]);
   //console.log({ userDetails });
 
-  const fetchuserdetails = async () => {
-    //   try{auth.onAuthStateChanged(async (user) => {
-    //     console.log(user);
+  // const fetchuserdetails = async () => {
+  //   //   try{auth.onAuthStateChanged(async (user) => {
+  //   //     console.log(user);
 
-    //     const docRef = doc(db, "Users", user.uid);
-    //     const docsnap = await getDoc(docRef);
+  //   //     const docRef = doc(db, "Users", user.uid);
+  //   //     const docsnap = await getDoc(docRef);
 
-    //     if (docsnap.exists()) {
-    //       //console.log(docsnap.data());
-    //       setUserDetails(docsnap.data());
-    //     } else {
-    //       console.log("user is not logged in");
-    //     }
+  //   //     if (docsnap.exists()) {
+  //   //       //console.log(docsnap.data());
+  //   //       setUserDetails(docsnap.data());
+  //   //     } else {
+  //   //       console.log("user is not logged in");
+  //   //     }
 
-    //   });
+  //   //   });
 
-    // } catch (error) {
-    //   console.error("Error fetching user details: ", error);
-    // }
+  //   // } catch (error) {
+  //   //   console.error("Error fetching user details: ", error);
+  //   // }
 
-    try {
-      auth.onAuthStateChanged(async (user) => {
-        const docref = collection(db, "todos");
-        //console.log(typeof auth.currentUser.uid);
-        const q = query(
-          docref,
-          where("userId", "==", auth?.currentUser?.uid)
-        );
+  //   try {
+  //     auth.onAuthStateChanged(async (user) => {
+  //       const docref = collection(db, "todos");
+  //       //console.log(typeof auth.currentUser.uid);
+  //       const q = query(
+  //         docref,
+  //         where("userId", "==", auth?.currentUser?.uid)
+  //       );
 
-        console.log(q)
+  //       console.log(q)
 
-        const querySnapshot = await getDocs(q);
-        // querySnapshot.forEach((doc) => {
-        //   // doc.data() is never undefined for query doc snapshots
-        //   console.log(doc.id, " => ", doc.data());
-        // });
+  //       const querySnapshot = await getDocs(q);
+  //       // querySnapshot.forEach((doc) => {
+  //       //   // doc.data() is never undefined for query doc snapshots
+  //       //   console.log(doc.id, " => ", doc.data());
+  //       // });
 
-        const data = querySnapshot.docs.map((doc) => {
-          return {
-            id: doc.id,
-            ...doc.data(),
-          }
-        });
-        console.log(data)
-        setarr_data(data)
+  //       const data = querySnapshot.docs.map((doc) => {
+  //         return {
+  //           id: doc.id,
+  //           ...doc.data(),
+  //         }
+  //       });
+  //       console.log(data)
+  //       setarr_data(data)
 
-      });
-    } catch (error) {
-      console.error(error);
-    }
+  //     });
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
 
     
-  };
+  // };
 
-  useEffect(() => {
-    fetchuserdetails();
-  }, [auth]);
+  // useEffect(() => {
+  //   fetchuserdetails();
+  // }, [auth]);
 
   
 
@@ -85,11 +85,12 @@ function Profile() {
     setadding(true);
     //console.log(auth.lastNotifiedUid);
 
-    const tasklist = await addDoc(collection(db, "todos"), {
-      taskname: formdata,
-      userId: auth.currentUser.uid,
-    });
-    fetchuserdetails();
+    // const tasklist = await addDoc(collection(db, "todos"), {
+    //   taskname: formdata,
+    //   userId: auth.currentUser.uid,
+    // });
+    // fetchuserdetails();
+    alert("Task added")
     setadding(false);
   }
   

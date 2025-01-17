@@ -1,29 +1,15 @@
 // Navbar.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import { Navbar, Nav, Form, FormControl, Button, NavDropdown } from 'react-bootstrap';
 import { auth } from './firebase';
 import { toast } from 'react-toastify';
 
 const Navbar1 = () => {
-    async function handleSignout() {
-        try {
-          await auth.signOut();
-          window.location.href = "/login";
-          console.log("user logged out succesfully");
-          toast.success("User logged out successfully", {
-            position: "top-center",
-          });
-        } catch (error) {
-          toast.error(
-            `Error: ${
-              error.response ? error.response.data.message : error.message
-            }`,
-            {
-              position: "bottom-center",
-            }
-          );
-        }
-      }
+    const [currentUser,setcurrentuser]= useState("$")
+
+    const handleSignout = ()=>{
+      alert("signed out")
+    }
     //console.log(auth.currentUser)
   return (
     <Navbar bg="dark" variant="dark" expand="lg" style={{ height: '60px', padding: '20px' }}>
@@ -40,7 +26,7 @@ const Navbar1 = () => {
         </Form>
         <Nav className="ms-auto">
           
-          {auth.currentUser && <NavDropdown title="Profile" id="basic-nav-dropdown"style={{ marginLeft: '-40px' }}>
+          {currentUser && <NavDropdown title="Profile" id="basic-nav-dropdown"style={{ marginLeft: '-40px' }}>
             <NavDropdown.Item href="/account">My Account</NavDropdown.Item>
             <NavDropdown.Item href="#action/3.2">Settings</NavDropdown.Item>
             <NavDropdown.Divider />

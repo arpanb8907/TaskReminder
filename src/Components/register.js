@@ -11,33 +11,28 @@ function Register() {
   const [lname, setLname] = useState("");
 
   const handleRegister = async (e) => {
-    e.preventDefault();
+    alert("User registered")
+
+    const userdata = {fname,lname,email,password}
+    const endpoint = '/user/register'
 
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      const user = auth.currentUser;
-      // console.log(user);
-      // console.log("User registered successfully")
+      const response = await axios.post(`http://localhost:5000${endpoint}`,userdata,{
 
-      toast.success("User registered successfully", {
-        position: "top-center",
+        headers: {
+          'Content-Type': 'application/json', // indicates JSON data is being sent
+        },
+        
       });
 
-      await setDoc(doc(db, "Users", user.uid), {
-        EmailId: email,
-        FirstName: fname,
-        LastName: lname,
-      });
+      
+
+
+
     } catch (error) {
-      toast.error(
-        `Error: ${
-          error.response ? error.response.data.message : error.message
-        }`,
-        {
-          position: "bottom-center",
-        }
-      );
+      console.log(error)
     }
+
   };
 
   return (

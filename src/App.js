@@ -22,11 +22,11 @@ import Account from "./Components/account";
 function App() {
   const [user, setuser] = useState();
 
-  useEffect(() => {
-    auth.onAuthStateChanged(async (user) => {
-      setuser(user);
-    });
-  }, []);
+  // useEffect(() => {
+  //   auth.onAuthStateChanged(async (user) => {
+  //     setuser(user);
+  //   });
+  // }, []);
 
   //<div className="auth-inner">
   return (

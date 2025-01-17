@@ -9,23 +9,7 @@ function Login() {
   const [password, setPassword] = useState("");
 
   const handlesubmit = async(e)=>{
-    e.preventDefault();
-
-    try {
-      await signInWithEmailAndPassword(auth,email,password)
-      const user = auth.currentUser
-      console.log(user);
-
-      toast.success("user logged in successfully",{
-        position:"top-center"
-      });
-      window.location.href = "/profile"
-      
-    } catch (error) {
-      toast.error(`Error: ${error.response ? error.response.data.message : error.message}`,{
-        position:"bottom-center"
-      });
-    }
+    alert("user logged in")
   }
 
   return (
