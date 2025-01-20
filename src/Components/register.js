@@ -1,19 +1,22 @@
 import React, { useState } from "react";
-import { auth, db } from "./firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { setDoc, doc } from "firebase/firestore";
-import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import axios from 'axios'
+
 
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
+  const navigate = useNavigate()
+  const [isLoading,setloading] = useState(false)
 
   const handleRegister = async (e) => {
-    alert("User registered")
+    
+    e.preventDefault()
 
     const userdata = {fname,lname,email,password}
+    setloading(true)
     const endpoint = '/user/register'
 
     try {
@@ -26,15 +29,27 @@ function Register() {
       });
 
       
+      
 
+      if(response.status === 201){
+
+        alert('User registered')
+        navigate('/login')
+      }
+
+      else{
+        alert(response.message)
+      }
 
 
     } catch (error) {
       console.log(error)
     }
+    finally{
+      setloading(false)
+    }
 
   };
-
   return (
     <div className="auth-wrapper">
       <div className="auth-inner">
@@ -85,10 +100,17 @@ function Register() {
           </div>
 
           <div className="d-grid">
-            <button type="submit" className="btn btn-primary">
-              Sign Up
+            <button type="submit" className="btn btn-primary" disabled={isLoading}>
+              {isLoading ? (
+                <div className="spinner-border spinner-border-sm" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              ) : (
+                "Sign Up"
+              )}
             </button>
           </div>
+
           <p className="forgot-password text-right">
             Already registered <a href="/login">Login</a>
           </p>
@@ -96,5 +118,6 @@ function Register() {
       </div>
     </div>
   );
-}
+};
+
 export default Register;
